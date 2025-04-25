@@ -8,21 +8,117 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            background-color: #f0f8ff;
             padding: 50px;
-            background-color: #f1f1f1;
+            transition: background-color 1s;
         }
+
         h1 {
-            color: #4CAF50;
+            color: #ff6347;
+            font-size: 2.5em;
         }
-        p {
-            font-size: 20px;
+
+        #motivasyon {
+            font-size: 1.5em;
             color: #333;
+            margin-top: 20px;
         }
+
+        #tıklama-buton {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #32cd32;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        #tıklama-buton:hover {
+            background-color: #228b22;
+        }
+
+        /* Balon animasyonu */
+        .balon {
+            position: absolute;
+            bottom: -50px;
+            animation: balonAnimasyonu 10s infinite;
+        }
+
+        @keyframes balonAnimasyonu {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-500px); opacity: 0; }
+        }
+
+        /* Animasyonlu kutlama */
+        .kutlama {
+            display: none;
+            font-size: 3em;
+            color: gold;
+            animation: kutlamaAnimasyonu 3s forwards;
+        }
+
+        @keyframes kutlamaAnimasyonu {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+        .show {
+            display: block;
+        }
+
     </style>
 </head>
 <body>
-    <h1>Taha, Her Şey Mükemmel Olacak!</h1>
-    <p>Bugün başarıya adım atmak için harika bir gün! 🏆</p>
-    <p>İlerlemen her geçen gün daha fazla olacak! 💪</p>
+    <h1>Taha, Harika Bir Gün!</h1>
+    <p id="motivasyon">Haydi, çalışmaya başla ve her şeyi başar!</p>
+
+    <!-- Tıklama Butonu -->
+    <button id="tıklama-buton">Motivasyon Al!</button>
+
+    <!-- Motivasyon Mesajları -->
+    <div id="kutlama" class="kutlama">Harika İş! 🎉</div>
+
+    <!-- Balonlar -->
+    <div class="balon" style="left: 10%;">🎈</div>
+    <div class="balon" style="left: 30%;">🎈</div>
+    <div class="balon" style="left: 50%;">🎈</div>
+    <div class="balon" style="left: 70%;">🎈</div>
+    <div class="balon" style="left: 90%;">🎈</div>
+
+    <script>
+        const motivasyonMesajları = [
+            "Bugün senin günün, başarabilirsin!",
+            "Her şey mümkün, sadece başlamak gerek!",
+            "Hedeflerine ulaşman an meselesi!",
+            "Daha güçlü bir şekilde devam et!",
+            "Kendine güven, her şey mümkün!"
+        ];
+
+        const buton = document.getElementById('tıklama-buton');
+        const motivasyon = document.getElementById('motivasyon');
+        const kutlama = document.getElementById('kutlama');
+        const body = document.body;
+
+        buton.addEventListener('click', function() {
+            // Motivasyon mesajını rastgele değiştir
+            const rastgeleMesaj = motivasyonMesajları[Math.floor(Math.random() * motivasyonMesajları.length)];
+            motivasyon.textContent = rastgeleMesaj;
+
+            // Animasyonla kutlama mesajını göster
+            kutlama.classList.add('show');
+
+            // Arka plan rengini değiştir
+            body.style.backgroundColor = '#f0e68c';
+
+            // 3 saniye sonra kutlama mesajını gizle
+            setTimeout(() => {
+                kutlama.classList.remove('show');
+                body.style.backgroundColor = '#f0f8ff';
+            }, 3000);
+        });
+    </script>
 </body>
 </html>
